@@ -60,10 +60,10 @@ Data yang digunakan pada proyek ini adalah Data Credit Card Churn Prediction yan
 - Credit_Limit: Batas kredit pelanggan.. (Integer)
 - Total_Revolving_Bal: Total saldo yang berputar dari pelanggan. (Integer)
 - Avg_Open_To_Buy: Rasio rata-rata pembelian yang terbuka bagi pelanggan. (Integer)
-- Total_Amt_Chng_Q4_Q1: Total jumlah yang berubah dari kuartal 4 ke kuartal 1.  (Integer)
+- Total_Amt_Chng_Q4_Q1: Total jumlah saldo yang berubah dari kuartal 4 ke kuartal 1.  (Integer)
 - Total_Trans_Amt: Total jumlah transaksi. (Integer)
 - Total_Trans_Ct: Total jumlah transaksi. (Integer)
-- Total_Ct_Chng_Q4_Q1: Total jumlah yang berubah dari kuartal 4 ke kuartal 1.  (Integer)
+- Total_Ct_Chng_Q4_Q1: Total frekuensi transaksi yang berubah dari kuartal 4 ke kuartal 1.  (Integer)
 - Avg_Utilization_Ratio: Rasio penggunaan rata-rata pelanggan. (Integer)
 
 ### Dataset Overview
@@ -80,21 +80,59 @@ Tabel 1. menunjukkan subset dataset informasi pengguna kartu kredit sebanyak 5 b
  
 ## Exploratory Data Analysis:
 Berikut ini adalah hasil exploratory analysis:
+1. Perbandingan tipe data pelanggan pengguna kartu kredit
+![Customer Type](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Customer_Type_Comparation.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa kelas 'Existing Customer' memiliki jumlah data yang jauh lebih banyak dibandingkan dengan kelas 'Attrited Customer' sehingga pada dataset yang digunakan ini terdapat data tak seimbang. Pada tahap data preparation akan dilakukan data balancing dengan metode SMOTE
+2. Plot Density Jumlah Hubungan Antara Pengguna dengan Penyedia Jasa Kartu Kredit
+![Total Relationship Count](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Relationship_Count.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah hubungan dengan penyedia jasa kartu kredit kurang dari 2 kali dan terjadi penurunan probabilitas saat pengguna melakukan hubungan denganp penyedia jasa kartu kredit lebih dari 3 kali.
+3. Plot Density Jumlah Bulan Pengguna Kartu Kredit Tidak Aktif
+![Months Inactive](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Month_Inactive_12.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika 3 sampai 4 bulan tidak aktif menggunakan kartu kredit.
+4. Plot Density Jumlah Saldo yang Berputar Pada Pengguna Kartu Kredit
+![Revolving Balance](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Revolving_Balance.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah saldo yang berputar hanya sebesar -500 sampai 600.
+5. Plot Density Total Jumlah Saldo saat Transaksi menggunakan Kartu Kredit
+![Transaction Amount](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Transfer_Amount.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah transaksi yang dilakukan menggunakan kartu kredit hanya sekitar 2500 sampai 4000.
+6. Plot Density Jumlah Frekuensi Transaksi menggunakan Kartu Kredit
+![Transaction Count](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Transfer_Count.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah frekuensi transaksi yang dilakukan menggunakan kartu kredit hanya sekitar 30 sampai 60 penggunaan.
+7. Plot Density Total frekuensi transaksi yang berubah dari kuartal 4 ke kuartal 1 
+![Transaction Count Q4 to Q1](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Count_Change_Q4_Q1.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika total frekuensi transaksi yang berubah dari kuartal 4 ke kuartal 1 berada pada skala 0 sampai 0.5 dari total skala 0 sampai 4.0.
+8. Plot Density Rata-rata Rasio Penggunaan Kartu Kredit
+![Average Utilization Ratio](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Average_Utilization_Ratio.png?raw=true)
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika rata-rata rasio penggunaan kartu kredit oleh pengguna adalah skala -0.2 sampai 0.15 dari total skala -0.2 sampai 1.2.
 
 ## Data Preparation
 Pada tahap ini dilakukan persiapan data sebelum digunakan model dengan tahapan sebagai berikut:
-- Split Dataset : Membagi data menjadi X (variabel fitur) dan y (variabel target). Kemudian dari kedua variabel tersebut dibagi menjadi X_train, X_test, y_train, dan y_test dengan proporsi 9:1.
-- Split Numerical and Categorical Columns : Membagi data sesuai tipe data agar memudahkan proses persiapan data selanjutnya
-- Handling Outlier : Melakukan pengecekan dan penanganan outlier pada data sebaran normal dan sebaran skew dengan metode Winsorizer yakni mengubah data outlier menjadi data maksimum dan minimun dalam sebaran data sehingga tidak ada data yang dibuang.
+- Split Dataset : Membagi data menjadi X (variabel fitur) dan y (variabel target) dengan proporsi data 8:2.
+- Feature Selection : Melakukan pemilihan fitur pada variabel numerik dan variabel kategorik dengan melakukan perhitungan nilai p-value. Variabel fitur yang digunakan pada pembuatan model ini adalah bertipe numerik dan kategorik sehingga untuk data bertipe numerik akan dilakukan pemilihan fitur dengan metode Kendall Tau sedangkan untuk data bertipe kategorik akan digunakan metode Chi-Squared.<br>
+    - Numerical Variable <br>
+    Kendall Tau adalah metode statistik non-parametrik yang digunakan untuk mengukur derajat korelasi antara variabel fitur bertipe numerik dengan variabel target bertipe kategorik. Kelebihan dari metode ini adalah:
+        - Tidak memerlukan asumsi tentang distribusi data
+        - Robust terhadap outlier
+    - Categoric Variable <br>
+    Chi-square test adalah metode statistik yang digunakan untuk menguji hubungan antara dua variabel kategorikal. Kelebihan dari metode ini adalah:
+        - Tidak ada asumsi distribusi tertentu yang harus dipenuhi oleh data. 
+        - Dapat memberikan hasil yang signifikan dengan sampel yang relatif kecil.
+- Handling Outlier : Melakukan pengecekan dan penanganan outlier pada data. Pada tahap ini digunakan metode Winsorizer untuk menangani outlier. Metode Winsorizer merupakan teknik statistik untuk menangani atau mengurangi outlier dari sebaran data. metode tersebut bekerja dengan mengubah nilai outlier menjadi nilai maksimum dan minimum dari sebaran.
 - Handling Missing Value : Melakukan pengecekan dan penanganan missing value.
-- Feature Selection : Melakukan pemilihan fitur pada variabel numerik dan variabel kategorik dengan melakukan perhitungan nilai p-value.
-- Cardinality : Melakukan pengecekan kardinality pada data kategorik untuk mengetahui jumlah kategori pada masing-masing variabel. Jika variabel memiliki kardinalitas yang tinggi, maka akan dilakukan data manipulasi untuk menurunkan kardinalitas.
-- Feature Scaling : Melakukan scaling pada variabel numerik dengan metode Standard Scaler agar sebaran data menjadi normal.
-- Feature Encoding : Melakukan encoding atau merubah data kategorik menjadi data numerik dengan dua metode yakni One Hot Encoding untuk data nominal dan Ordinal Encoding untuk data ordinal.
-- Label Encoding : Melakukan encoding pada variabel target menjadi data numerik
+- Feature Scaling : Melakukan perubahan nilai fitur pada data yang digunakan sehingga memiliki skala yang sama.
+    - Normal Distribution <br>
+        Minmax Scaler digunakan untuk scaling data numerik dengan sebaran skew karena metode ini melakukan perhitungan dengan menggunakan nilai minimum dan maksimum (bukan mean dan media) sehingga metode ini baik digunakan untuk data yang tidak berdistribusi normal.
+    - Skew Distribution <br>
+        Standard scaler digunakan untuk scaling data numerik dengan sebaran normal karena metode ini melakukan perubahan data sehingga memiliki mean 0 dan standard deviasi 1.
+- Feature Encoding : Melakukan encoding atau erubah data pada variabel kategorik menjadi bentuk yang dapat dimengerti oleh algoritma pembelajaran mesin.
+    - One-Hot Encoding <br>
+    One-Hot Encoding adalah metode encoding yang merubah data kategorik nominal menjadi vektor biner dengan nilai 0 dan 1.
+    - Ordinal Encoding <br>
+    Ordinal Encoding digunakan untuk mengubah variabel kategorik ordinal menjadi numerik berdasarkan urutan atau peringkat.
+- Label Encoding : Melakukan encoding dengan mengubah variabel target bertipe kategorik menjadi numerik. Setiap kelas unik pada variabel target diubah menjadi angka unik bertipe integer.
 
 ## Modeling
-Tahapan ini digunakan dua algoritma yakni SVM dan Random Forest.
+Tahapan ini digunakan tiga algoritma yakni SVM, Random Forest, dan XGBoost.
 ### SVM
 Support Vector Machine (SVM) merupakan algoritma yang berkerja untuk menemukan batas keputusan yang memaksimalkan jarak dari titik data terdekat pada semua kelas data.
 #### Kelebihan
@@ -111,26 +149,30 @@ Random Forest merupakan algoritma gabungan yang terdiri dari kombinasi algoritma
 - Tidak sensitif terhadap outlier dan missing value.
 #### Kekurangan
 - Model yang kompleks sehingga waktu komputasi yang dibutuhkan cukup lama.
+
+### XGBoost
+XGBoost merupakan algortima gabungan yang menggunakan pendekatan boosting dimana algoritma ini menggabungkan sejumlah model yang lemah menjadi model yang lebih akurat.
+#### Kelebihan
+- Memiliki performa yang baik dengan akurasi yang tinggi
+#### Kekurangan
+- Mudah menjadi overfitting jika parameter tidak ditentukan dengan benar
+
 Model yang dipilih adalah model yang memiliki akurasi yang tinggi pada data train dan data test (tidak overfitting dan underfitting).
 
 ## Evaluation
+Dengan perbedaan jumlah kelas yang signifikan pada variabel target yang mengindikasikan adanya data tak seimbang, metrik akurasi sudah tidak relevan digunakan untuk evaluasi model ini. Oleh karena itu digunakanlah metrik recall yang lebih sesuai untuk data tak seimbang.
+
+Metrik recall, juga dikenal sebagai sensitivity atau true positive rate (TPR), adalah ukuran evaluasi yang mengukur kemampuan model untuk mengidentifikasi semua kelas positif yang benar dalam suatu dataset. Pada kasus ini kelas positif tersebut adalah kelas yang akan diprediksi yakni 'Attrited Customer'.
+
 Dari hasil model training yang telah dilakukan, didapatkan hasil:
-- SVM
-    - Akurasi data train : 0.96 
-    - Akurasi data test : 0.94
-- Random Forest
-    - Akurasi data train : 1.00 
-    - Akurasi data test : 0.95
+Tabel 2. Hasil Perbandingan Recall Data Train dan Data Test Model SVM, Random Forest, dan XGBoost
+|Algoritma |Recall Train	|Recall Test	
+---|---|---
+SVM	|0.93	|0.66	
+Random Forest	|1.00	|0.87	
+XGBoost	|0.99	|0.88	
 
-Terlihat bahwa akurasi data train Random Forest lebih besar dibandingkan dengan SVM, namun terdapat selisih yang cukup besar jika dibandingkan dengan akurasi data testnya, sehingga terdapat kemungkinan overfitting pada model tersebut. Untuk selanjutnya akan digunakan model svm untuk menjelaskan problem statement pada proyek ini.
-
-### Interpretasi Metrik 
-Goals atau tujuan dari proyek ini adalah untuk memprediksi pelanggan dengan risiko tinggi untuk beralih ke produk lain sehingga metrik yang digunakan adalah precision dari hasil prediksi oleh model terhadap 'Attrition Customer'.
-
-![alt text](output.png)
-
-Diketahui label 0 = 'Existing Customer' dan 1 = 'Attrition Customer'.
-Dari hasil pengecekan prediksi menggunakan data testing didapatkan nilai precison label 1 sebesar 0.98 yang artinya <b>Model memprediksi dengan benar 98% pelanggan yang memiliki potensi beralih ke produk perbankan lain. </b>
+Pada Tabel 2. terlihat bahwa ketiga model mengalami overfitting dimana algoritma SVM merupakan algoritma dengan overfitting terbesar. Dari model Random Forest dan XGBoost memiliki nilai yang tidak berbeda jauh namun dilihat dari selisih recall data train dan data test, XGBoost merupakan model yang paling baik dari ketiga model tersebut.
 
 ### Faktor-Faktor yang mempengaruhi Churn pelanggan
 Setelah dilakukan uji statistik pada tahap feature selection, berikut ini adalah variabel yang mempengaruh Churn pelanggan yang juga digunakan sebagai variabel feature pada model
@@ -150,9 +192,10 @@ Setelah dilakukan uji statistik pada tahap feature selection, berikut ini adalah
 - Avg_Utilization_Ratio 
 
 ## Conclusion
-Setelah dilakukan pembuatan model machine learning didapatkan model yang cukup baik dalam memprediksi churn pelanggan. Dari dua algoritma yang digunakan dipilih algoritma SVM dengan akurasi model sebesar 0.94. 
+Setelah dilakukan pembuatan model machine learning dengan tiga algoritma yang berbeda didapatkan model yang paling baik dalam memprediksi churn pelanggan yakni model XGBoost.
 
-Kemudian dilakukan pengecekan variabel yang mempengaruhi churn pelanggan. Dari hasil tersebut dapat memberikan informasi karakteristik pelanggan yang berpotensi churn dan membantu dalam membuat strategi bisnis kedepannya.
+Dari hasil EDA didapatkan informasi sebagai berikut:
+-
 
 ## Reference
 [1] : D. AL-Najjar, N. Al-Rousan, A. Hazem, "Machine Learning to Develop Credit Card Customer Churn Prediction", <i>J. Theor. Appl.
