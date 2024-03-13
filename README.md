@@ -79,7 +79,7 @@ Tabel 1. Subset Dataset Informasi Pengguna Kartu Kredit
 Tabel 1. menunjukkan subset dataset informasi pengguna kartu kredit sebanyak 5 baris dan 9 kolom dari total dataset awal sebanyak 10127 baris dan 23 kolom. Kemudian dilakukan penghapusan 3 kolom yang tidak digunakan pada model sehingga hanya digunakan 20 kolom. Total data numerik pada data yang digunakan sebanyak 14 dan kolom kategorik sebanyak 6.
  
 ## Exploratory Data Analysis:
-Pada tahap ini dilakukan dua tahap analisis yakni Univariate Analysis dan Bivariate Analysis dari kolom numerik dan kategorik
+Berikut ini adalah hasil exploratory analysis:
 
 ## Data Preparation
 Pada tahap ini dilakukan persiapan data sebelum digunakan model dengan tahapan sebagai berikut:
@@ -92,7 +92,6 @@ Pada tahap ini dilakukan persiapan data sebelum digunakan model dengan tahapan s
 - Feature Scaling : Melakukan scaling pada variabel numerik dengan metode Standard Scaler agar sebaran data menjadi normal.
 - Feature Encoding : Melakukan encoding atau merubah data kategorik menjadi data numerik dengan dua metode yakni One Hot Encoding untuk data nominal dan Ordinal Encoding untuk data ordinal.
 - Label Encoding : Melakukan encoding pada variabel target menjadi data numerik
-
 
 ## Modeling
 Tahapan ini digunakan dua algoritma yakni SVM dan Random Forest.
