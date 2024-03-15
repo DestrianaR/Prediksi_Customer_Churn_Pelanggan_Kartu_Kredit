@@ -129,7 +129,7 @@ Pada tahap ini dilakukan persiapan data sebelum digunakan model dengan tahapan s
     One-Hot Encoding adalah metode encoding yang merubah data kategorik nominal menjadi vektor biner dengan nilai 0 dan 1.
     - Ordinal Encoding <br>
     Ordinal Encoding digunakan untuk mengubah variabel kategorik ordinal menjadi numerik berdasarkan urutan atau peringkat.
-- Label Encoding : Melakukan encoding dengan mengubah variabel target bertipe kategorik menjadi numerik. Setiap kelas unik pada variabel target diubah menjadi angka unik bertipe integer.
+
 
 ## Modeling
 Tahapan ini digunakan tiga algoritma yakni SVM, Random Forest, dan XGBoost.
@@ -168,11 +168,11 @@ Dari hasil model training yang telah dilakukan, didapatkan hasil:
 Tabel 2. Hasil Perbandingan Recall Data Train dan Data Test Model SVM, Random Forest, dan XGBoost
 |Algoritma |Recall Train	|Recall Test	
 ---|---|---
-SVM	|0.93	|0.66	
-Random Forest	|1.00	|0.87	
-XGBoost	|0.99	|0.88	
+SVM	|0.89	|0.82	
+Random Forest	|1.00	|0.92	
+XGBoost	|0.99	|0.92	
 
-Pada Tabel 2. terlihat bahwa ketiga model mengalami overfitting dimana algoritma SVM merupakan algoritma dengan overfitting terbesar. Dari model Random Forest dan XGBoost memiliki nilai yang tidak berbeda jauh namun dilihat dari selisih recall data train dan data test, XGBoost merupakan model yang paling baik dari ketiga model tersebut.
+Pada Tabel 2. terlihat bahwa ketiga model mengalami overfitting. Model Random Forest dan XGBoost memiliki nilai yang tidak berbeda jauh namun dilihat dari selisih nilai recall data train dan data test, XGBoost merupakan model yang paling baik dari ketiga model tersebut.
 
 ### Faktor-Faktor yang mempengaruhi Churn pelanggan
 Setelah dilakukan uji statistik pada tahap feature selection, berikut ini adalah variabel yang mempengaruh Churn pelanggan yang juga digunakan sebagai variabel feature pada model
