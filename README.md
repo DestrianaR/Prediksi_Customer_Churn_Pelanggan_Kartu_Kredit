@@ -192,10 +192,13 @@ Setelah dilakukan uji statistik pada tahap feature selection, berikut ini adalah
 - Avg_Utilization_Ratio 
 
 ## Conclusion
-Setelah dilakukan pembuatan model machine learning dengan tiga algoritma yang berbeda didapatkan model yang paling baik dalam memprediksi churn pelanggan yakni model XGBoost.
+Setelah dilakukan pembuatan model machine learning dengan tiga algoritma yang berbeda, diketahui bahwa ketiga model mengalami overfitting dan model XGBoost adalah model dengan tingkat overfitting yang paling rendah terlihat dari selisih nilai recall train dan test yang paling kecil.
 
-Dari hasil EDA didapatkan informasi sebagai berikut:
--
+**Future Improvement**
+
+Berikut ini adalah beberapa saran yang dapat dilakukan pada pengembangan model machine learning selanjutnya terkait dengan prediksi churn pelanggan kartu kredit.
+1. Mengatasi data imbalance
+2. Menerapkan Parameter Tuning dengan parameter yang belum digunakan.
 
 ## Reference
 [1] : D. AL-Najjar, N. Al-Rousan, A. Hazem, "Machine Learning to Develop Credit Card Customer Churn Prediction", <i>J. Theor. Appl.
