@@ -22,13 +22,13 @@ Perpindahan pelanggan merugikan bisnis karena dapat mengakibatkan kerugian premi
 ### Goals
 - Melakukan uji korelasi untuk mengetahui faktor-faktor yang mempengaruhi churn pelanggan:<br>
 Menganalisis data untuk menentukan hubungan antara berbagai faktor dan kemudian melakukan uji korelasi statistik untuk mengidentifikasi hubungan yang signifikan.<br>
--Membuat model machine learning untuk mengidentifikasi pelanggan:<br>
+- Membuat model machine learning untuk mengidentifikasi pelanggan:<br>
 Mengembangkan model machine learning yang dapat memprediksi pelanggan dengan risiko tinggi untuk beralih ke produk lain.<br>
     
 #### Solution statements
 Berdasarkan permasalahan dan tujuan yang ingin dicapai, maka pada proyek ini solusi dengan tahapan sebagai berikut:
 - Melakukan <i>Exploratory Data Analysis</i> pada dataset untuk mengetahui hasil visualisasi data, melihat apakah ada hubungan antar variabel, dan mendapatkan insight dari visualisasi tersebut.
-- Mengembangkan model machine learning dengan menggunakan dua algoritma yakni SVM, Random Forest, dan XGBoost.
+- Mengembangkan model machine learning dengan menggunakan tiga algoritma yakni SVM, Random Forest, dan XGBoost.
     - SVM (Support Vector Machine) : Algoritma yang mencari daerah keputusan terbaik (hyperplane) yang memisahkan dua kelas dalam ruang fitur.
         - Kelebihan : Efektif dalam ruang fitur berdimensi tinggi
         - Kelemahan : Rentan terhadap overfitting jika parameter tidak diatur dengan baik
@@ -85,7 +85,7 @@ Berikut ini adalah hasil exploratory analysis:
 Pada hasil visualisasi diatas terlihat bahwa kelas 'Existing Customer' memiliki jumlah data yang jauh lebih banyak dibandingkan dengan kelas 'Attrited Customer' sehingga pada dataset yang digunakan ini terdapat data tak seimbang. Pada tahap data preparation akan dilakukan data balancing dengan metode SMOTE
 2. Plot Density Jumlah Hubungan Antara Pengguna dengan Penyedia Jasa Kartu Kredit
 ![Total Relationship Count](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Total_Relationship_Count.png?raw=true)
-Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah hubungan dengan penyedia jasa kartu kredit kurang dari 2 kali dan terjadi penurunan probabilitas saat pengguna melakukan hubungan denganp penyedia jasa kartu kredit lebih dari 3 kali.
+Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika jumlah hubungan dengan penyedia jasa kartu kredit kurang dari 2 kali dan terjadi penurunan probabilitas saat pengguna melakukan hubungan dengan penyedia jasa kartu kredit lebih dari 3 kali.
 3. Plot Density Jumlah Bulan Pengguna Kartu Kredit Tidak Aktif
 ![Months Inactive](https://github.com/DestrianaR/Prediksi_Customer_Churn_Pelanggan_Kartu_Kredit/blob/main/Density_Month_Inactive_12.png?raw=true)
 Pada hasil visualisasi diatas terlihat bahwa pengguna kartu kredit memiliki probabilitas lebih tinggi menjadi 'Attrited Customer' jika 3 sampai 4 bulan tidak aktif menggunakan kartu kredit.
